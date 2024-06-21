@@ -1,4 +1,4 @@
-class HashTable:
+class HashTable(object):
     def __init__(self, size=40):
         # create empty list table
         self.table = []
@@ -11,22 +11,19 @@ class HashTable:
         # calculate a hash function for which bucket this value will be inserted into
         bucket = hash(key) % len(self.table)
         bucket_list = self.table[bucket]
-
-        # if the key is found in the list, update it.
-        #  If a collision occurs (i.e., if the key already exists in the bucket list), the new key-value pair
-        #  is appended to the end of the list.
+        # If the key is found in the list, update it.
+        # If a collision occurs (i.e., if the key already exists in the bucket list), the new key-value pair is appended to the end of the list.
         for key_value in bucket_list:
             if key_value[0] == key:
                 key_value[1] = value
                 return True
-        # if they key isn't found in the list already, append the key value pair to the bucket
+        # if key isn't found in list, append the key value pair to the bucket
         key_value = [key, value]
         bucket_list.append(key_value)
 
     def search(self, key):
         bucket = hash(key) % len(self.table)
         bucket_list = self.table[bucket]
-
         # search for the key in the buckets. If the key isn't found, return None
         for key_value in bucket_list:
             if key_value[0] == key:
@@ -43,14 +40,9 @@ class HashTable:
                 return deleted_item
         return None  # return None if the item is not found
 
-    def as_list(self):
-        all_items = []
-        for entry in self.table:
-            if entry is not None:
-                all_items.extend(entry)
-        return all_items
-
-# myHash = HashTable()
-# p1arr = ['Tanner', 'Kerby', 'New York']
-# myHash.insert(1, p1arr)
-# print(myHash.table)
+    def update(self, ID, Package):
+        key = hash(ID) % len(self.table)
+        bucket_list = self.table[key]
+        for x in bucket_list:
+            if x[0] == ID:
+                x[1] = Package

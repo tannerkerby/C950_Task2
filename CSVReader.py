@@ -1,33 +1,27 @@
 import csv
 
-data = []
+distanceData = []
 addressData = []
 
 
+############################## DISTANCE CSV DATA PARSING ##############################################
 def load_distance_data(filename):
     with open(filename) as CSV_Distance:
         reader = csv.reader(CSV_Distance)
         next(reader)
         for row in reader:
-            data.append(row[1:])
-            # print(row)
+            floats_row = [float(value) for value in row[1:]]  # this converts the numbers to floats
+            distanceData.append(floats_row)
+    return distanceData
 
 
-load_distance_data('DistanceTable.csv')
-# distance = data[19][18]
-# print(distance) # #TESTING
-# print(data[0]) # #TESTING
-
-
+############################## ADDRESS CSV DATA PARSING ##############################################
 def load_address_data(filename):
     with open(filename) as CSV_Addresses:
         reader = csv.reader(CSV_Addresses)
         for row in reader:
-            addressData.append(row)
-            #print(row[0], row[2])
-
-
-load_address_data('Addresses.csv')
+            addressData.append(str.strip(row[2]))
+    return addressData
 
 
 

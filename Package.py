@@ -1,28 +1,16 @@
-# Package Class with status update function
+# Package Class
 class Package:
-    def __init__(self, ID, address, city, state, zipcode, Deadline_time, weight, specialNotes, status):
+    def __init__(self, ID = None, info = None, truck = None, status = 'HUB', timeLoaded = None, timeDelivered = None):
         self.ID = ID
-        self.address = address
-        self.city = city
-        self.state = state
-        self.zipcode = zipcode
-        self.Deadline_time = Deadline_time
-        self.weight = weight
-        self.specialNotes = specialNotes
+        self.info = info  # list that contains all information from package CSV (address, etc)
+        self.truck = truck
         self.status = status
-        self.departure_time = None
-        self.delivery_time = None
+        self.timeLoaded = timeLoaded
+        self.timeDelivered = timeDelivered
+        return
 
     def __str__(self):
-        return (f"{self.ID}, {self.address}, {self.city}, {self.state}, {self.zipcode}, "
-                f"{self.Deadline_time}, {self.weight}, {self.specialNotes}, {self.status}")
+        return f"ID: {self.ID}, Info: {self.info}, Truck: {self.truck}, Status: {self.status}, Time Loaded: {self.timeLoaded}, Time Delivered: {self.timeDelivered}"
 
-    def update_status(self, convert_timedelta):
-        if self.delivery_time < convert_timedelta:
-            self.status = "Delivered"
-        elif self.departure_time > convert_timedelta:
-            self.status = "En route"
-        else:
-            self.status = "At Hub"
 
 
